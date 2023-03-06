@@ -1,4 +1,4 @@
-function Gameboard() {
+const gameboard = (() => {
   const board = [
     [0, 0, 0],
     [0, 0, 0],
@@ -11,14 +11,17 @@ function Gameboard() {
       }
     }
   }
-  function addPiece(piece, column, row) {
-
+  function addPiece(piece, row, column) {
+    this.board[row][column] = piece;
   }
-  return { resetBoard, addPiece };
-}
+  return { resetBoard, addPiece, board }; // Prob remove board
+})();
 
 const Player = (piece) => {
   this.piece = piece;
+  function placePiece() {
+    gameboard.addPiece(this.piece, row, column);
+  }
   return { piece };
 };
 
