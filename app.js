@@ -27,14 +27,20 @@ const gameboard = (() => {
 })();
 
 const gameState = (() => {
-  const Player = (piece) => {
-    this.piece = piece;
-    function placePiece() {
-      gameboard.addPiece(this.piece, row, column);
-    }
-    return { piece };
-  };
-
-  const playerOne = Player('x');
-  const playerTwo = Player('o');
+  let turn = 1;
+  function changeTurn() {
+    turn === 1 ? (turn = 2) : (turn = 1);
+    console.log(turn);
+  }
+  return { turn, changeTurn };
 })();
+
+const Player = (piece) => {
+  this.piece = piece;
+  function placePiece() {
+    gameboard.addPiece(this.piece, row, column);
+  }
+};
+
+const playerOne = Player('x');
+const playerTwo = Player('o');
