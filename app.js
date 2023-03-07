@@ -8,7 +8,7 @@ const gameState = (() => {
     }
   }
   function playTurn() {}
-  return { turn, changeTurn };
+  return { turn, changeTurn, playTurn };
 })();
 
 const gameboard = (() => {
