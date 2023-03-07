@@ -27,10 +27,11 @@ const gameboard = (() => {
 })();
 
 const gameState = (() => {
-  let turn = 1;
+  const turn = 1;
   function changeTurn() {
-    turn === 1 ? (turn = 2) : (turn = 1);
-    console.log(turn);
+    if (this.turn === 1) {
+      this.turn = 2;
+    } else { this.turn = 1; }
   }
   return { turn, changeTurn };
 })();
