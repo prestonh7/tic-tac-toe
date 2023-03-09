@@ -1,5 +1,5 @@
 const gameState = (() => {
-  const turn = 1;
+  const turn = 0;
   function changeTurn() {
     if (this.turn === 1) {
       this.turn = 2;
@@ -7,7 +7,9 @@ const gameState = (() => {
       this.turn = 1;
     }
   }
-  function playTurn() {}
+  function playTurn() {
+    const number = button.split('-')[1];
+  }
   return { turn, changeTurn, playTurn };
 })();
 
@@ -19,10 +21,12 @@ const gameboard = (() => {
   ];
   // Draws gameboard to screen
   const content = document.querySelector('.content');
+  let count = 0;
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[i].length; j++) {
       const button = document.createElement('button');
-      button.className = `gameSquare row-${i} column-${j}`;
+      button.className = `gameSquare place-${count}`;
+      count++;
       button.addEventListener('click', gameState.playTurn());
       content.appendChild(button);
     }
@@ -42,9 +46,7 @@ const gameboard = (() => {
 
 const Player = (piece) => {
   this.piece = piece;
-  function placePiece() {
-    gameboard.addPiece(this.piece, row, column);
-  }
+  function placePiece() {} // Todo
 };
 
 const playerOne = Player('x');
