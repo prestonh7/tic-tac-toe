@@ -30,9 +30,36 @@ const gameboard = (() => {
   function resetBoard() {
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board[i].length; j++) {
-        board[i][j] = 0;
+        board[i][j] = '';
       }
     }
+  }
+  function checkForWinner() {
+    // Check rows
+    for (let i = 0; i < board.length; i++) {
+      if (board[i][0] !== '' && board[i][0] === board[i][1] && board[i][1] === board[i][2]) {
+        resetBoard();
+        return true;
+      }
+    }
+    // Check columns
+    for (let j = 0; j < board[0].length; j++) {
+      if (board[0][j] !== '' && board[0][j] === board[1][j] && board[1][j] === board[2][j]) {
+        resetBoard();
+        return true;
+      }
+    }
+    // Check diagonals
+    if (board[0][0] !== '' && board[0][0] === board[1][1] && board[1][1] === board[2][2]) {
+      resetBoard();
+      return true;
+    }
+    if (board[0][2] !== '' && board[0][2] === board[1][1] && board[1][1] === board[2][0]) {
+      resetBoard();
+      return true;
+    }
+    // No winner found
+    return false;
   }
   // Adds piece to array
   function addPiece(piece, row, column) {
@@ -43,9 +70,11 @@ const gameboard = (() => {
     if (gameState.turn === 1) {
       addPiece(playerOne.piece, i, j);
       gameState.changeTurn();
+      checkForWinner();
     } else {
       addPiece(playerTwo.piece, i, j);
       gameState.changeTurn();
+      checkForWinner();
     }
   }
   // Draws gameboard to screen
@@ -69,5 +98,5 @@ const gameboard = (() => {
       content.appendChild(button);
     }
   }
-  return { resetBoard, addPiece, board }; // Prob remove board
+  return { resetBoard, board }; // Prob remove board
 })();
