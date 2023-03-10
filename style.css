@@ -16,3 +16,7 @@ body {
 .gameSquare:hover {
 	background-color: purple;
 }
+
+button {
+	color: white;
+}

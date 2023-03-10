@@ -7,7 +7,7 @@ const gameState = (() => {
       this.turn = 1;
     }
   }
-  return { turn, changeTurn };
+  return { changeTurn };
 })();
 
 const Player = (piece) => ({
@@ -30,9 +30,11 @@ const gameboard = (() => {
       }
     }
   }
+  // Adds piece to array
   function addPiece(piece, row, column) {
     board[row][column] = piece;
   }
+  // Checks who's turn it is and adds the piece
   function playTurn(i, j) {
     if (gameState.turn === 1) {
       addPiece(playerOne.piece, i, j);
@@ -47,10 +49,15 @@ const gameboard = (() => {
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[i].length; j++) {
       const button = document.createElement('button');
-      button.className = `gameSquare ${i} ${j}`;
-      // Grab row and column from class
+      button.className = `gameSquare ${i},${j}`;
+      // Uses for loop variables to select correct element
       button.addEventListener('click', (e) => {
         playTurn(i, j);
+        if (gameState.turn === 1) {
+          button.innerText = 'x';
+        } else {
+          button.innerText = 'o';
+        }
       });
       content.appendChild(button);
     }
