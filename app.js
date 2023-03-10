@@ -7,9 +7,7 @@ const gameState = (() => {
       this.turn = 1;
     }
   }
-  function playTurn() {
-    const number = button.split('-')[1];
-  }
+  function playTurn() {}
   return { turn, changeTurn, playTurn };
 })();
 
@@ -19,18 +17,6 @@ const gameboard = (() => {
     ['', '', ''],
     ['', '', ''],
   ];
-  // Draws gameboard to screen
-  const content = document.querySelector('.content');
-  let count = 0;
-  for (let i = 0; i < board.length; i++) {
-    for (let j = 0; j < board[i].length; j++) {
-      const button = document.createElement('button');
-      button.className = `gameSquare place-${count}`;
-      count++;
-      button.addEventListener('click', gameState.playTurn());
-      content.appendChild(button);
-    }
-  }
   function resetBoard() {
     for (let i = 0; i < board.length; i++) {
       for (let j = 0; j < board[i].length; j++) {
@@ -39,7 +25,23 @@ const gameboard = (() => {
     }
   }
   function addPiece(piece, row, column) {
-    this.board[row][column] = piece;
+    board[row][column] = piece;
+  }
+  // Draws gameboard to screen
+  const content = document.querySelector('.content');
+  for (let i = 0; i < board.length; i++) {
+    for (let j = 0; j < board[i].length; j++) {
+      const button = document.createElement('button');
+      button.className = `gameSquare ${i} ${j}`;
+      button.addEventListener('click', (e) => {
+        // const buttons = document.querySelectorAll('gameSquare');
+        // const place = buttons.className.split(' ');
+        // const row = buttons.split(' ')[1];
+        // const column = buttons.split(' ')[2];
+        // addPiece('x', row, column);
+      });
+      content.appendChild(button);
+    }
   }
   return { resetBoard, addPiece, board }; // Prob remove board
 })();
