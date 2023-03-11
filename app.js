@@ -96,11 +96,11 @@ const gameboard = (() => {
         if (validTurn(i, j) === true) {
           if (gameState.turn === 1) {
             playTurn(i, j);
-            button.innerText = 'x';
+            button.innerText = 'X';
             checkForWinner();
           } else {
             playTurn(i, j);
-            button.innerText = 'o';
+            button.innerText = 'O';
             checkForWinner();
           }
         }
