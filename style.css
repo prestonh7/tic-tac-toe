@@ -2,6 +2,25 @@ body {
 	background-color: black;
 }
 
+header {
+	color: white;
+	display: flex;
+	justify-content: space-around;
+}
+
+.gameSpace {
+	display: grid;
+	grid-template: 5fr / 1fr 1fr 1fr;
+	align-items: center;
+	justify-items: center;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .content {
 	display: grid;
 	grid-template: 5em 5em 5em / 5em 5em 5em;
@@ -17,6 +36,8 @@ body {
 	background-color: purple;
 }
 
-button {
+button,
+.piece {
 	color: white;
+	font-size: 3em;
 }
