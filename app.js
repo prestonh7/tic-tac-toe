@@ -69,6 +69,16 @@ const gameboard = (() => {
     // No winner found
     return false;
   }
+  function emptySpaces() {
+    for (let i = 0; i < board.length; i++) {
+      for (let j = 0; j < board[i].length; j++) {
+        if (board[i][j] === '') {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
   function resetGame() {
     resetBoard();
     removePieces();
@@ -96,13 +106,16 @@ const gameboard = (() => {
       button.className = `gameSquare ${i},${j}`;
       // Uses for loop variables to select correct element
       button.addEventListener('click', (e) => {
-        if (validTurn(i, j) === true) {
+        if (validTurn(i, j)) {
           if (gameState.getTurn() === 1) {
             playTurn(i, j);
             button.innerText = 'X';
             if (checkForWinner()) {
               resetGame();
               console.log("X's wins!");
+            } else if (!emptySpaces()) {
+              resetGame();
+              console.log('Tie!');
             }
           } else if (gameState.getTurn() === 2) {
             playTurn(i, j);
@@ -110,6 +123,9 @@ const gameboard = (() => {
             if (checkForWinner()) {
               resetGame();
               console.log("O's wins!");
+            } else if (!emptySpaces()) {
+              resetGame();
+              console.log('Tie!');
             }
           }
         }
