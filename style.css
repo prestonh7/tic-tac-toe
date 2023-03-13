@@ -8,6 +8,12 @@ header {
 	justify-content: space-around;
 }
 
+.scoreboard {
+	display: flex;
+	justify-content: center;
+	margin: 1em;
+}
+
 .gameSpace {
 	display: grid;
 	grid-template: 5fr / 1fr 1fr 1fr;
@@ -37,7 +43,8 @@ header {
 }
 
 button,
-.piece {
+.piece,
+.scoreboard {
 	color: white;
 	font-size: 3em;
 }
