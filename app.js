@@ -16,9 +16,18 @@ const gameState = (() => {
   return { changeTurn, resetTurn, getTurn };
 })();
 
-const Player = (piece) => ({
-  piece,
-});
+const Player = (piece) => {
+  let score = 0;
+  return {
+    piece,
+    incrementScore() {
+      score++;
+    },
+    getScore() {
+      return score;
+    },
+  };
+};
 
 const playerOne = Player('x');
 const playerTwo = Player('o');
