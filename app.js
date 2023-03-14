@@ -55,7 +55,7 @@ const displayController = (() => {
           clearInterval(blink);
           return;
         }
-        body.style.backgroundColor = count % 2 === 0 ? 'hsl(0, 0%, 40%)' : 'rgb(0, 0, 0)'; // Gray
+        body.style.backgroundColor = count % 2 === 0 ? 'hsl(0, 0%, 10%)' : 'rgb(0, 0, 0)'; // Gray
         count++;
       }, 200);
     }
