@@ -32,6 +32,37 @@ const Player = (piece) => {
 const playerOne = Player('x');
 const playerTwo = Player('o');
 
+const displayController = (() => {
+  const scoreboard = document.querySelector('.scoreboard');
+  const body = document.querySelector('body');
+  function updateScoreboard() {
+    scoreboard.innerText = `${playerOne.getScore()} / ${playerTwo.getScore()}`;
+  }
+  function flashBoard(condition) {
+    let count = 0;
+    if (condition === 'win') {
+      const blink = setInterval(() => {
+        if (count === 6) {
+          clearInterval(blink);
+          return;
+        }
+        body.style.backgroundColor = count % 2 === 0 ? 'hsl(120, 90%, 10%)' : 'rgb(0, 0, 0)'; // Green
+        count++;
+      }, 200);
+    } else if (condition === 'tie') {
+      const blink = setInterval(() => {
+        if (count === 6) {
+          clearInterval(blink);
+          return;
+        }
+        body.style.backgroundColor = count % 2 === 0 ? 'hsl(0, 0%, 40%)' : 'rgb(0, 0, 0)'; // Gray
+        count++;
+      }, 200);
+    }
+  }
+  return { updateScoreboard, flashBoard };
+})();
+
 const gameboard = (() => {
   const board = [
     ['', '', ''],
@@ -92,6 +123,7 @@ const gameboard = (() => {
     resetBoard();
     removePieces();
     gameState.resetTurn();
+    displayController.updateScoreboard();
   }
   // Adds piece to array
   function addPiece(piece, row, column) {
@@ -120,21 +152,23 @@ const gameboard = (() => {
             playTurn(i, j);
             button.innerText = 'X';
             if (checkForWinner()) {
+              playerOne.incrementScore();
+              displayController.flashBoard('win');
               resetGame();
-              console.log("X's wins!");
             } else if (!emptySpaces()) {
               resetGame();
-              console.log('Tie!');
+              displayController.flashBoard('tie');
             }
           } else if (gameState.getTurn() === 2) {
             playTurn(i, j);
             button.innerText = 'O';
             if (checkForWinner()) {
+              playerTwo.incrementScore();
+              displayController.flashBoard('win');
               resetGame();
-              console.log("O's wins!");
             } else if (!emptySpaces()) {
               resetGame();
-              console.log('Tie!');
+              displayController.flashBoard('tie');
             }
           }
         }
